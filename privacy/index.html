@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALETHRA - Join the Clarity Movement</title>
+    
+<script src="https://cdn.tailwindcss.com"></script>
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // PRIMARY COLOR VARIABLE
+                        'klyr-red': '#E72F3C',
+                        // DARK TEXT COLOR VARIABLE
+                        'klyr-dark': '#1F2937',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+          .section-title {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .section-number {
+    font-size: 4rem;
+    line-height: 1;
+    font-weight: 800;
+    color: #E72F3C;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+}
+
+.section-text {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+        .skiptranslate {
+            display: none!important;
+        }
+        /* ===================================================================
+        GLOBAL STYLING
+        =================================================================== */
+        
+        /* --- CONFIGURATION VARIABLES FOR INDENTATION & SPACING --- */
+        /* Adjust these values (in pixels) to control the mobile navigation layout */
+        :root { 
+            --mobile-indent-px: 32px; /* Indentation for sub-menu items */
+            --mobile-group-spacing-px: 18px; /* Vertical space *between* main mobile groups */
+            /* Padding for sub-links to make them cleaner (was 48px) */
+            --mobile-sub-item-py: 16px; /* Vertical padding (top/bottom) for mobile sub-links (controls space *between* sub-links) */
+            --site-max-width: 1100px; 
+            --nav-footer-max-width: 2000px; 
+        }
+
+        .nav-item:hover {
+            color: #E72F3C;
+        }
+        /* -------------------------------------------------- */
+
+        /* Ensures Inter font loads smoothly */
+        @import url('https://fonts.fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+        }
+
+        /* Custom class for standard content width */
+        .max-w-site {
+            max-width: var(--site-max-width);
+        }
+
+        /* Custom class for header and footer content width */
+        .max-w-super-wide {
+            max-width: var(--nav-footer-max-width);
+        }
+        
+        /* Applying variables to crisis cards */
+        .crisis-card-style {
+            background-color: #f9f9f9; 
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Applying variables to content box */
+        #content-box.content-box-border-style {
+            border: 4px solid var(--klyr-red) !important;
+        }
+
+        /* CRITICAL: HIDES GOOGLE TRANSLATE UI ELEMENTS */
+        #google_translate_element, 
+        .goog-te-gadget,
+        .goog-te-banner-frame {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        body { top: 0px !important; position: relative !important; }
+
+        /* ===================================================================
+        NAVIGATION & DROPDOWN STYLES
+        =================================================================== */
+        /* Desktop Navigation Item Base Style */
+        /* FIX: Explicitly set base color to klyr-dark for full visibility of hover transition */
+        .nav-item {
+            @apply text-klyr-dark hover:text-klyr-red transition duration-150 whitespace-nowrap;
+        }
+        
+        /* Mobile Accordion Wrapper (Main Navigation Items) */
+        .mobile-dropdown-group {
+            @apply border-b border-gray-100;
+        }
+        /* Add spacing between the main navigation items, but not before the first one */
+        .mobile-dropdown-group:not(:first-child) {
+            margin-top: var(--mobile-group-spacing-px);
+        }
+        
+        /* Consolidated Mobile Item Base Style for Links and Buttons */
+        .mobile-nav-item-base {
+            @apply w-full flex justify-between items-center text-left text-base font-medium text-klyr-dark hover:text-klyr-red py-3 pr-0 transition duration-150;
+        }
+        
+        /* Mobile Collapsible Content Area (CRITICAL HIDING CSS) */
+        .mobile-dropdown-content {
+            /* max-height: 0 is the starting state */
+            max-height: 0; 
+            /* Opacity starts at 0 */
+            opacity: 0; 
+            pointer-events: none; 
+            /* Use the variable defined at the top for indentation */
+            padding-left: var(--mobile-indent-px);
+            /* transition-all includes max-height and opacity/transform */
+            @apply overflow-hidden bg-gray-50 transition-all duration-300; 
+        }
+        
+        /* Class added by JS when the accordion is OPEN */
+        .mobile-dropdown-content.open {
+            opacity: 1;
+            pointer-events: auto; 
+            /* max-height set inline by JS when opening, not here */
+        }
+
+        /* Mobile Sub-Item Links (Dropdown Links) - Base style, no border here */
+        .mobile-sub-item {
+            /* Now uses CSS variable for vertical padding (controlling space between sub-items) */
+            padding-top: var(--mobile-sub-item-py);
+            padding-bottom: var(--mobile-sub-item-py);
+            /* Base styles */
+            @apply block text-sm text-klyr-dark hover:text-klyr-red uppercase; 
+        }
+        
+        /* FIX: Apply border-top ONLY to sub-items that are NOT the first child.
+           This creates a single, clean dividing line BETWEEN items. */
+        .mobile-dropdown-content .mobile-sub-item:not(:first-child) {
+            @apply border-t border-gray-300; 
+        }
+
+
+        /* Form Input Styles */
+        .klyr-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.5rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .klyr-input:focus {
+            outline: none;
+            border-color: #E72F3C;
+            box-shadow: 0 0 0 3px rgba(231, 47, 60, 0.2);
+        }
+
+        /* Custom style for the policy header */
+        .policy-logo-text {
+             /* Makes the logo checkmark red and text dark gray */
+            @apply flex items-center mb-2;
+        }
+        .policy-logo-text img {
+            @apply h-8 w-8 mr-2;
+        }
+        .policy-logo-text span {
+            @apply text-base font-bold text-klyr-dark;
+        }
+    </style>
+</head>
+<body>
+
+    
+<div id="google_translate_element"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                autoDisplay: false,
+                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+    
+<header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-super-wide mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+<div id="nav-logo-link" class="flex-shrink-0 cursor-pointer">
+                    
+<img id="nav-logo-img" class="h-6 w-auto" alt="KLYR™ Logo" onerror="this.outerHTML = '<span class=\'text-xl font-bold text-klyr-red\'>KLYR™</span>';">
+                </div>
+                
+                
+<div class="flex items-center space-x-4">
+                    
+                    
+<nav class="hidden md:flex space-x-6 text-sm font-medium">
+                        
+                        
+<a href="/confusion" class="nav-item">THE PROBLEM</a>
+
+                        
+<div class="relative group">
+                            
+<a href="#" class="nav-item flex items-center">
+                                THE SOLUTION
+                                <i class="fas fa-chevron-down text-xs ml-1 transition-transform group-hover:rotate-180"></i>
+                            </a>
+                            
+<div class="absolute left-0 mt-0.5 w-60 bg-white rounded-lg shadow-xl py-2 z-60 hidden group-hover:block transition duration-150 ease-in-out origin-top border border-gray-100">
+                                
+<a href="#" class="block px-4 py-2 text-sm text-klyr-dark hover:bg-gray-100 hover:text-klyr-red uppercase">TECHNOLOGY</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-klyr-dark hover:bg-gray-100 hover:text-klyr-red uppercase">ECOSYSTEM</a>
+                            </div>
+                        </div>
+
+                        
+<div class="relative group">
+                            
+<a href="#" class="nav-item flex items-center">
+                                IMPACT
+                                <i class="fas fa-chevron-down text-xs ml-1 transition-transform group-hover:rotate-180"></i>
+                            </a>
+                            
+<div class="absolute left-0 mt-0.5 w-40 bg-white rounded-lg shadow-xl py-2 z-60 hidden group-hover:block transition duration-150 ease-in-out origin-top border border-gray-100">
+                                
+<a href="#" class="block px-4 py-2 text-sm text-klyr-dark hover:bg-gray-100 hover:text-klyr-red uppercase">CASE STUDIES</a>
+                            </div>
+                        </div>
+
+                        
+<div class="relative group">
+                            
+<a href="#" class="nav-item flex items-center">
+                                ABOUT
+                                <i class="fas fa-chevron-down text-xs ml-1 transition-transform group-hover:rotate-180"></i>
+                            </a>
+                            
+<div class="absolute left-0 mt-0.5 w-80 bg-white rounded-lg shadow-xl py-2 z-60 hidden group-hover:block transition duration-150 ease-in-out origin-top border border-gray-100">
+                                
+<a href="#" class="block px-4 py-2 text-sm text-klyr-dark hover:bg-gray-100 hover:text-klyr-red uppercase">Regulatory & Standards Engagement</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-klyr-dark hover:bg-gray-100 hover:text-klyr-red uppercase">ALETHRACERTIFIED™</a>
+                            </div>
+                        </div>
+
+                        
+<a href="#" class="nav-item">PRESS & MEDIA</a>
+
+                        
+<a id="nav-join-movement" href="#" class="nav-item font-bold">JOIN THE MOVEMENT</a>
+                    </nav>
+
+                    
+<i id="global-icon-desktop" class="fas fa-globe text-gray-500 hover:text-klyr-red cursor-pointer transition md:ml-4 hidden md:block"></i>
+
+                    
+<button id="mobile-menu-btn" type="button" class="md:hidden text-gray-500 hover:text-klyr-red p-2 rounded-md focus:outline-none -mr-2">
+                        <i id="menu-icon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+    
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-white shadow-2xl z-[90] transform translate-x-full transition-transform duration-300 md:hidden">
+        
+<div class="flex justify-end items-center h-16 border-b border-gray-100 px-6">
+            
+<button id="mobile-close-btn" class="absolute top-6 right-6 text-gray-500 hover:text-klyr-red p-2 rounded-md focus:outline-none">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+<nav class="py-4 space-y-0 px-6">
+            
+            
+<div class="mobile-dropdown-group">
+                 <a href="#" class="mobile-nav-item-base">
+                    <span>THE PROBLEM</span>
+                 </a>
+            </div>
+            
+            
+<div class="mobile-dropdown-group">
+                <button data-dropdown-id="solution-dropdown-mobile" class="mobile-nav-item-base" role="button" aria-expanded="false">
+                    <span>THE SOLUTION</span>
+                    <i class="fas fa-chevron-down text-sm transition-transform duration-300 dropdown-icon"></i>
+                </button>
+                <div id="solution-dropdown-mobile" class="mobile-dropdown-content">
+                    
+<a href="#" class="mobile-sub-item">TECHNOLOGY</a>
+                    <a href="#" class="mobile-sub-item">ECOSYSTEM</a>
+                </div>
+            </div>
+
+            
+<div class="mobile-dropdown-group">
+                <button data-dropdown-id="impact-dropdown-mobile" class="mobile-nav-item-base" role="button" aria-expanded="false">
+                    <span>IMPACT</span>
+                    <i class="fas fa-chevron-down text-sm transition-transform duration-300 dropdown-icon"></i>
+                </button>
+                <div id="impact-dropdown-mobile" class="mobile-dropdown-content">
+                    <a href="#" class="mobile-sub-item">CASE STUDIES</a>
+                </div>
+            </div>
+
+            
+<div class="mobile-dropdown-group">
+                <button data-dropdown-id="about-dropdown-mobile" class="mobile-nav-item-base" role="button" aria-expanded="false">
+                    <span>ABOUT</span>
+                    <i class="fas fa-chevron-down text-sm transition-transform duration-300 dropdown-icon"></i>
+                </button>
+                <div id="about-dropdown-mobile" class="mobile-dropdown-content">
+                    <a href="#" class="mobile-sub-item uppercase">Regulatory & Standards Engagement</a>
+                    <a href="#" class="mobile-sub-item">ALETHRACERTIFIED™</a>
+                </div>
+            </div>
+            
+            
+<div class="mobile-dropdown-group">
+                <a href="#" class="mobile-nav-item-base">
+                    <span>PRESS & MEDIA</span>
+                </a>
+            </div>
+
+            
+<div class="mobile-dropdown-group">
+                 <a id="mobile-join-movement" href="#" class="mobile-nav-item-base font-bold text-klyr-dark justify-start">
+                    <span>JOIN THE MOVEMENT</span>
+                 </a>
+            </div>
+            
+            
+<div class="mobile-dropdown-group border-none">
+                 <a id="global-link-mobile" href="#" class="mobile-nav-item-base justify-start pr-0">
+                    <i class="fas fa-globe text-lg"></i>
+                    <span>SELECT REGION / LANGUAGE</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        
+<div id="homepage-content">
+            
+        
+            <div class="max-w-policy mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        
+        <!-- HEADER SECTION: 1. ALETHRA™ PRIVACY POLICY --><div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            
+            <!-- Logo Sidebar Column (Order-first on mobile, order-last on desktop) --><div class="order-first md:order-last md:col-span-4 policy-logo-container">
+                
+                <!-- MyALETHRA Logo --><div class="policy-logo-item">
+                   
+                    <!-- Placeholder URL for MyALETHRA Logo (Red checkmark circle) --><img src="https://placehold.co/48x48/E72F3C/ffffff?text=%E2%9C%93" alt="MyALETHRA Verified Logo" class="policy-logo-img" />
+                </div>
+                
+                <!-- ALETHRA ENTERPRISE Logo --><div class="policy-logo-item">
+                  
+                    <!-- Placeholder URL for ALETHRA Enterprise Logo (Red checkmark circle) --><img src="https://placehold.co/48x48/E72F3C/ffffff?text=%E2%9C%93" alt="ALETHRA Enterprise Verified Logo" class="policy-logo-img" />
+                </div>
+                
+                <!-- ALETHRA CERTIFIED Logo (First occurrence) --><div class="policy-logo-item">
+               
+                    <!-- Placeholder URL for ALETHRA Certified Logo (Round version with text) --><img src="https://placehold.co/64x64/E72F3C/ffffff?text=CERTIFIED" alt="ALETHRA Certified Logo" class="policy-logo-img policy-certified-logo-img" />
+                </div>
+            </div>
+
+            <!-- Main Content Column --><div class="md:col-span-8 order-last md:order-first">
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-snug mb-8 text-center md:text-left">
+                    <span class="text-klyr-red">ALETHRA™</span> PRIVACY POLICY
+                </h1>
+                
+                <p class="text-lg text-gray-700 mb-4">
+                    <span class="text-klyr-red font-bold">ALETHRA™</span> is a clarity technology platform developed by <span class="text-klyr-red font-bold">ALETHRA™</span> Sciences Inc. designed to prevent confusion and enhance consumer safety through AI-powered product identification and verification.
+                </p>
+
+                <p class="text-lg text-gray-700 mb-4">
+                    This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our website, mobile applications, and related services ("Services").
+                </p>
+
+                <p class="text-lg text-gray-700">
+                    By using <span class="text-klyr-red font-bold">ALETHRA™</span>, you agree to the collection and use of information in accordance with this Privacy Policy.
+                </p>
+                
+                <!-- Horizontal Red Line Separator --><hr class="mt-8 mb-0 border-t-4 border-klyr-red">
+            </div>
+        </div>
+
+        
+        <!-- SECTION 2: INFORMATION WE COLLECT --><div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            
+            <!-- Main Content Column (Section 2 Text) --><div class="md:col-span-8">
+                
+                <div class="section-title">
+                    <span class="section-number">2.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            INFORMATION WE COLLECT
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-extrabold text-klyr-dark mb-4">
+                        A. Information You Provide
+                    </h3>
+                    <ul class="text-lg text-gray-700 ml-10">
+                        <li>
+                            <span class="font-bold">Account Information:</span> Name, email address, password, and optional profile details when you create or manage an account.
+                        </li>
+                        <li>
+                            <span class="font-bold">User Inputs:</span> Product scans, feedback, images, and comments submitted through the app.
+                        </li>
+                        <li>
+                            <span class="font-bold">Beta Testing Data:</span> Voluntary performance and feedback data if you participate in the Beta program.
+                        </li>
+                    </ul>
+                    
+                    <h3 class="text-2xl font-extrabold text-klyr-dark mt-8 mb-4">
+                        B. Automatically Collected Information
+                    </h3>
+                    <ul class="text-lg text-gray-700 ml-10">
+                        <li>
+                            <span class="font-bold">Device Information:</span> Device type, operating system, unique device identifiers.
+                        </li>
+                        <li>
+                            <span class="font-bold">Usage Data:</span> App interactions, scan frequency, session duration, and crash logs.
+                        </li>
+                        <li>
+                            <span class="font-bold">Location Data (optional):</span> Used only when you permit it, to improve accuracy of product recognition or locate nearby verified products.
+                        </li>
+                        <li>
+                            <span class="font-bold">Cookies and Analytics:</span> Used to measure traffic, improve user experience, and diagnose performance issues.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Certified Logo Sidebar Column (Visible on all sizes, aligned with Section 2) --><div class="md:col-span-4 hidden md:block mt-10">
+                <!-- ALETHRA CERTIFIED Logo (Second occurrence) --><div class="policy-logo-item">
+                    <!-- Placeholder URL for ALETHRA Certified Logo (Round version with text) --><img src="https://placehold.co/128x128/E72F3C/ffffff?text=CLARITY%0ACOMPLIANCE%0ASAFETY" alt="ALETHRA Certified Logo" class="policy-logo-img policy-certified-logo-img w-32 h-32" />
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION 3 & 4 CONTAINER --><div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            
+            <!-- SECTION 3: HOW WE USE YOUR INFORMATION --><div>
+                <div class="section-title">
+                    <span class="section-number">3.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            HOW WE USE YOUR INFORMATION<
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-lg text-gray-700 ml-10">
+                    <p>We use collected information to:</p>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Operate, maintain, and improve <span class="font-bold">ALETHRA™</span> Services.</li>
+                        <li>Train our AI systems to improve accuracy and safety outcomes.</li>
+                        <li>Respond to inquiries, bug reports, and support requests.</li>
+                        <li>Send you important updates, feature notices, or policy changes.</li>
+                        <li>Analyze anonymized usage trends for research and innovation.</li>
+                    </ol>
+                    <p class="text-klyr-red font-extrabold mt-6">
+                        "We never sell personal data to third parties."
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 4: DATA SHARING AND DISCLOSURE --><div>
+                <div class="section-title">
+                    <span class="section-number">4.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            DATA SHARING AND DISCLOSURE
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-lg text-gray-700 ml-10">
+                    <p>We may share information only in the following limited situations:</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>
+                            <span class="font-bold">Service Providers:</span> Trusted vendors who help operate the platform (hosting, analytics, testing).
+                        </li>
+                        <li>
+                            <span class="font-bold">Legal Compliance:</span> When required by law or to protect rights, safety, and integrity.
+                        </li>
+                        <li>
+                            <span class="font-bold">Corporate Events:</span> In the case of a merger or acquisition, subject to this policy's protections.
+                        </li>
+                    </ul>
+                    <p class="mt-4">
+                        All partners must comply with strict confidentiality and data protection standards.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+   
+
+
+        <!-- SECTION 5 & 6 CONTAINER --><div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            
+            <!-- SECTION 5: DATA RETENTION --><div>
+                <div class="section-title">
+                    <span class="section-number">5.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            DATA <br> RETENTION
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-lg text-gray-700 ml-10">
+                    <p>
+                        We retain personal data only as long as necessary to fulfill the purposes described above or as required by law. You may request deletion of your account and associated data at any time.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 6: DATA SECURITY --><div class="relative">
+                <div class="section-title">
+                    <span class="section-number">6.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            DATA <br>SECURITY
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-lg text-gray-700 ml-10">
+                    <p>
+                        <span class="font-bold">ALETHRA™</span> employs encryption, secure servers, and multi-layered safeguards to protect your data from unauthorized access, alteration, or disclosure. While no system is entirely immune, we are committed to continuous monitoring and improvement of our security posture.
+                    </p>
+                </div>
+                
+                <!-- Certified Logo for Section 6 --><div class="absolute top-0 right-0 mt-6 mr-6 md:mr-0 hidden sm:block">
+                    <img src="https://placehold.co/128x128/E72F3C/ffffff?text=CLARITY%0ACOMPLIANCE%0ASAFETY" alt="ALETHRA Certified Logo" class="policy-logo-img policy-certified-logo-img w-28 h-28" />
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- SECTION 7 & 8 CONTAINER --><div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            
+            <!-- SECTION 7: YOUR RIGHTS --><div>
+                <div class="section-title">
+                    <span class="section-number">7.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            YOUR <span class="text-klyr-red">RIGHTS</span>
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-lg text-gray-700 ml-10">
+                    <p>
+                        Depending on your location, you may have the following rights:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Access, correct, or delete your data.</li>
+                        <li>Withdraw consent or restrict processing.</li>
+                        <li>Request a copy of your data (data portability).</li>
+                    </ul>
+                    <p>
+                        To exercise these rights, contact us at 
+                        <a href="mailto:privacy@myalethra.com" class="text-klyr-red font-bold hover:underline">privacy@myalethra.com</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 8: CHILDREN'S PRIVACY --><div>
+                <div class="section-title">
+                    <span class="section-number">8.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            CHILDREN'S PRIVACY
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-lg text-gray-700 ml-10">
+                    <p>
+                        <span class="font-bold">ALETHRA™</span> is not directed to children under 13. We do not knowingly collect personal data from children. If you believe a child has provided us data, please contact us immediately to remove it.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+   
+
+        <!-- SECTION 9 & 10 CONTAINER --><div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            
+            <!-- SECTION 9: INTERNATIONAL USERS --><div>
+                <div class="section-title">
+                    <span class="section-number">9.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            INTERNATIONAL USERS
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-lg text-gray-700 ml-10">
+                    <p>
+                        Data may be processed on servers located in the United States, Mexico, or other jurisdictions. By using the Services, you consent to cross-border data transfers consistent with this policy.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 10: UPDATES TO THIS POLICY --><div>
+                <div class="section-title">
+                    <span class="section-number">10.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            UPDATES TO THIS POLICY
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-lg text-gray-700 ml-10">
+                    <p>
+                        We may update this Privacy Policy from time to time. The "Effective Date" above will indicate the latest revision. Continued use of <span class="font-bold">ALETHRA™</span> after updates constitutes your acceptance of the revised terms.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- SECTION 11 & 12 CONTAINER --><div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            
+            <!-- SECTION 11: USER DATA DELETION REQUESTS --><div>
+                <div class="section-title">
+                    <span class="section-number">11.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            USER DATA DELETION REQUESTS
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-lg text-gray-700 ml-10">
+                    <p>
+                        You have the right to request deletion of any personal data we hold about you.
+                    </p>
+                    <p>
+                        To submit a data deletion request, please email us at <a href="mailto:privacy@myalethra.com" class="text-klyr-red font-bold hover:underline">privacy@myalethra.com</a> with the subject line "Data Deletion Request."
+                    </p>
+                    <p>
+                        For security purposes, we may need to verify your identity before fulfilling your request.
+                    </p>
+                    <p>
+                        Once verified, your data will be permanently removed from our systems within 30 days, except where retention is required by law (such as for security or regulatory compliance).
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 12: CONTACT US --><div>
+                <div class="section-title">
+                    <span class="section-number">12.</span>
+                    <div class="section-text-container w-full">
+                        <h2 class="section-text">
+                            CONTACT US
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-2 text-lg text-gray-700 ml-10 font-bold">
+                    <p><span class="font-bold">ALETHRA™</span> Sciences Inc.</p>
+                    <p>Attn: Privacy Officer</p>
+                    <p>Email: <a href="mailto:privacy@myalethra.com" class="text-klyr-red hover:underline">privacy@myalethra.com</a></p>
+                    <p>Website: <a href="http://www.MyALETHRA.com" target="_blank" class="text-klyr-red hover:underline">www.MyALETHRA.com</a></p>
+                </div>
+            </div>
+        </div>
+
+    
+</main>
+
+    
+<div id="country-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[100] hidden opacity-0 modal-transition">
+        <div id="modal-content" class="bg-white rounded-2xl shadow-2xl w-11/12 max-w-4xl p-8 relative transform scale-95 modal-transition">
+            
+<button id="close-modal-btn" class="absolute top-6 left-6 text-gray-500 hover:text-klyr-red transition duration-150">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            
+            
+<div id="country-list-container" class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-4 max-h-[70vh] overflow-y-auto pt-4 pb-2">
+                
+</div>
+        </div>
+    </div>
+    
+    
+<footer class="bg-gray-50 border-t border-gray-200 pt-12 pb-8">
+        <div class="max-w-super-wide mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+            
+<div class="flex justify-center space-x-6 mb-6">
+                
+<a href="#" class="text-klyr-red hover:text-red-700 transition duration-150"><i class="fab fa-instagram text-2xl"></i></a>
+                
+<a href="#" class="text-klyr-red hover:text-red-700 transition duration-150"><i class="fab fa-facebook-f text-2xl"></i></a>
+
+<a href="#" class="text-klyr-red hover:text-red-700 transition duration-150"><i class="fab fa-linkedin-in text-2xl"></i></a>
+            </div>
+
+            
+<p class="text-sm text-klyr-dark mb-2" id="copyright-text">
+                &copy;2025 <span class="text-klyr-red">ALETHRA</span> Sciences Inc. All rights reserved.
+            </p>
+            
+            
+<p class="text-xs text-klyr-dark mb-6">
+                <span class="text-klyr-red">ALETHRA</span><span class="text-klyr-dark">™</span>, 
+                <span class="text-klyr-red">MyALETHRA</span><span class="text-klyr-dark">™</span>, 
+                <span class="text-klyr-red">ALETHRASCAN</span><span class="text-klyr-dark">™</span>, 
+                <span class="text-klyr-red">ALETHRACAM</span><span class="text-klyr-dark">™</span>, 
+                <span class="text-klyr-red">ALETHRACLOUD</span><span class="text-klyr-dark">™</span>, 
+                and <span class="text-klyr-red">ALETHRAAI</span><span class="text-klyr-dark">™</span> are trademarks of <span class="text-klyr-red">ALETHRA</span>™ Sciences Inc.
+            </p>
+
+            
+<div class="flex justify-center space-x-4 text-xs text-klyr-dark">
+                <a href="#" class="hover:text-klyr-red transition duration-150">Privacy Policy</a>
+                <span>|</span>
+                <a href="#" class="hover:text-klyr-red transition duration-150">Terms of Use</a>
+                <span>|</span>
+                <a href="#" class="hover:text-klyr-red transition duration-150">Contact Us</a>
+            </div>
+            
+            
+<p class="text-xs text-klyr-dark mt-2 mb-4">
+                Advancing clarity through technology.
+            </p>
+
+            
+<div class="mt-4 pt-4 border-t border-gray-200 flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                
+                
+<p class="font-bold text-klyr-dark text-sm">
+                    Ready to lead with clarity?
+                </p>
+
+                
+<a href="#" class="bg-klyr-red hover:bg-red-700 text-white py-2 px-5 rounded shadow-lg transition duration-300 transform hover:scale-105 uppercase tracking-wider inline-block w-full md:w-auto font-bold text-xs">
+                    GET ALETHRA CERTIFIED™
+                </a>
+            </div>
+            
+</div>
+    </footer>
+
+    
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Global Data (Countries & Languages) ---
+            const countries = [
+                { name: "Global", sub: "🌎", isGlobal: true, slug: 'global', langCode: 'en' },
+                { name: "Argentina", sub: "", slug: 'ar', langCode: 'es' },
+                { name: "Australia & New Zealand", sub: "", slug: 'au', langCode: 'en' },
+                { name: "Belgium", sub: "", slug: 'be', langCode: 'fr' },
+                { name: "Brazil", sub: "Brasil", slug: 'br', langCode: 'pt' },
+                { name: "Canada", sub: "(English)", slug: 'ca', langCode: 'en' },
+                { name: "Canada", sub: "Le Canada (Français)", slug: 'qc', langCode: 'fr' },
+                { name: "Central America & Caribbean", sub: "América Central y el Caribe", slug: 'cb', langCode: 'es' },
+                { name: "Chile", sub: "", slug: 'cl', langCode: 'es' },
+                { name: "China", sub: "中国", slug: 'cn', langCode: 'zh-CN' },
+                { name: "Colombia", sub: "", slug: 'co', langCode: 'es' },
+                { name: "Croatia", sub: "", slug: 'hr', langCode: 'hr' },
+                { name: "Czech Republic", sub: "", slug: 'cz', langCode: 'cs' },
+                { name: "Ecuador", sub: "", slug: 'ec', langCode: 'es' },
+                { name: "Finland", sub: "", slug: 'fi', langCode: 'fi' },
+                { name: "France", sub: "", slug: 'fr', langCode: 'fr' },
+                { name: "Germany, Austria, Switzerland", sub: "Deutschland, Österreich, Schweiz", slug: 'de', langCode: 'de' },
+                { name: "Greece", sub: "", slug: 'gr', langCode: 'el' },
+                { name: "Hungary", sub: "", slug: 'hu', langCode: 'hu' },
+                { name: "India", sub: "", slug: 'in', langCode: 'en' }, 
+                { name: "Indonesia", sub: "", slug: 'id', langCode: 'id' },
+                { name: "Ireland", sub: "", slug: 'ie', langCode: 'en' },
+                { name: "Italy", sub: "Italia", slug: 'it', langCode: 'it' },
+                { name: "Japan", sub: "日本", slug: 'jp', langCode: 'ja' },
+                { name: "Latvia", sub: "", slug: 'lv', langCode: 'lv' },
+                { name: "Maghreb", sub: "Le Maghreb", slug: 'ma', langCode: 'fr' },
+                { name: "Malaysia", sub: "", slug: 'my', langCode: 'ms' },
+                { name: "Mexico", sub: "México", slug: 'mx', langCode: 'es' },
+                { name: "Netherlands", sub: "", slug: 'nl', langCode: 'nl' },
+                { name: "Norway", sub: "", slug: 'no', langCode: 'no' },
+                { name: "Pakistan", sub: "", slug: 'pk', langCode: 'ur' },
+                { name: "Paraguay", sub: "", slug: 'py', langCode: 'es' },
+                { name: "Peru", sub: "Perú", slug: 'pe', langCode: 'es' },
+                { name: "Philippines", sub: "", slug: 'ph', langCode: 'en' },
+                { name: "Poland", sub: "", slug: 'pl', langCode: 'pl' },
+                { name: "Portugal", sub: "Portugal", slug: 'pt', langCode: 'pt' },
+                { name: "Romania", sub: "", slug: 'ro', langCode: 'ro' },
+                { name: "Saudi Arabia", sub: "", slug: 'sa', langCode: 'ar' },
+                { name: "Serbia", sub: "", slug: 'rs', langCode: 'sr' },
+                { name: "Singapore", sub: "", slug: 'sg', langCode: 'en' },
+                { name: "Slovakia", sub: "", slug: 'sk', langCode: 'sk' },
+                { name: "South Africa", sub: "", slug: 'za', langCode: 'en' },
+                { name: "South Korea", sub: "", slug: 'kr', langCode: 'ko' },
+                { name: "Spain", sub: "España", slug: 'es', langCode: 'es' },
+                { name: "Sweden", sub: "Sverige", slug: 'sv', langCode: 'sv' },
+                { name: "Switzerland", sub: "Suisse (Français)", slug: 'ch', langCode: 'fr' }, 
+                { name: "Taiwan", sub: "", slug: 'tw', langCode: 'zh-TW' }, 
+                { name: "Thailand", sub: "", slug: 'th', langCode: 'th' },
+                { name: "Turkey", sub: "Türkiye", slug: 'tr', langCode: 'tr' },
+                { name: "Ukraine", sub: "", slug: 'ua', langCode: 'uk' },
+                { name: "United Kingdom", sub: "", slug: 'uk', langCode: 'en' },
+                { name: "United States of America", sub: "", slug: 'us', langCode: 'en' },
+                { name: "Venezuela", sub: "", slug: 've', langCode: 'es' },
+                { name: "Vietnam", sub: "", slug: 'vn', langCode: 'vi' },
+            ];
+            
+            // Generate a list of all valid slugs for path checking
+            const VALID_SLUGS = countries.map(c => c.slug).filter(s => s !== 'global');
+            
+            // --- Global Constants and Selectors ---
+            const LOGO_TEXT = 'ALETHRA™';
+            const NAV_LOGO_URL = 'https://plusbrand.com/wp-content/uploads/2025/10/Copia-de-ALETHRA_Logo-scaled.png'; 
+            // NOTE: Removed CONTENT_IMG_URL and CONTENT_BOX_CLASSES as they are no longer relevant for the new hero section.
+
+            const navLogoImg = document.getElementById('nav-logo-img');
+            // const contentLogoImg = document.getElementById('content-logo-img'); // REMOVED
+            // const contentBox = document.getElementById('content-box'); // REMOVED
+            // NOTE: messageBox element is not present in the HTML, commenting out use for now to avoid errors.
+            // const messageBox = document.getElementById('message-box'); 
+
+            // --- Page Routing Elements ---
+            const homepageContent = document.getElementById('homepage-content');
+            const betaSignupPage = document.getElementById('beta-signup-page');
+            const joinBetaBtn = document.getElementById('join-beta-btn'); 
+            const backToHomeBtn = document.getElementById('back-to-home-btn');
+            const navLogoLink = document.getElementById('nav-logo-link'); 
+            const navJoinMovement = document.getElementById('nav-join-movement'); 
+            const mobileJoinMovement = document.getElementById('mobile-join-movement'); 
+            // NOTE: joinMyAlethraBeta element is not present in the HTML, commenting out use for now to avoid errors.
+            // const joinMyAlethraBeta = document.getElementById('join-myalethra-beta'); 
+            const joinMyAlethraBeta = null; // Placeholder to prevent reference error
+
+            // --- Form Elements ---
+            // NOTE: Form elements are not present on this privacy policy page, commenting out to prevent errors
+            // const countrySelect = document.getElementById('country-select');
+            // const registrationForm = document.getElementById('beta-registration-form');
+            // const formContainer = document.getElementById('beta-form-container');
+            // const confirmationMessage = document.getElementById('beta-confirmation-message');
+            // const shareMovementBtn = document.getElementById('share-movement-btn');
+            
+            // --- Modal Elements ---
+            const countryModal = document.getElementById('country-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const countryListContainer = document.getElementById('country-list-container');
+            const modalContent = document.getElementById('modal-content');
+            const globalIconDesktop = document.getElementById('global-icon-desktop');
+            const globalLinkMobile = document.getElementById('global-link-mobile');
+
+            // --- Mobile Menu Elements ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileCloseBtn = document.getElementById('mobile-close-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileDropdownTriggers = document.querySelectorAll('button[data-dropdown-id]');
+
+
+            // --- Helper Functions ---
+
+            // Custom alert message function (since we can't use alert())
+            function alertMessage(message, isError = false) {
+                // Since the HTML doesn't include the #message-box element, we will use console for messages.
+                console.log(`[ALERT] ${isError ? 'ERROR: ' : ''}${message}`);
+                // if (messageBox) { ... existing logic ... }
+            }
+            
+            // --- Google Translate Functionality ---
+            function translatePage(langCode) {
+                const translateSelect = document.querySelector('#google_translate_element select');
+                if (translateSelect) {
+                    translateSelect.value = langCode;
+                    translateSelect.dispatchEvent(new Event('change'));
+                } else {
+                    // console.log('Google Translate element not ready, retrying...'); // Debugging for readiness
+                    setTimeout(() => { translatePage(langCode); }, 100);
+                }
+            }
+
+            // --- URL Path and Translation Logic ---
+            function setCountryPath(newSlug, newLangCode) {
+                // Simplified URL logic:
+                if (newLangCode !== 'en') {
+                    translatePage(newLangCode);
+                    alertMessage(`Region set to ${newSlug.toUpperCase()}. Content translated to ${newLangCode.toUpperCase()}.`);
+                } else {
+                    translatePage('en');
+                    alertMessage(`Region set to GLOBAL. Content translated to ENGLISH.`);
+                }
+                closeOutModal();
+            }
+            
+            function checkAndApplyTranslationOnLoad() {
+                const currentPath = window.location.pathname;
+                const pathSegments = currentPath.split('/').filter(p => p.length > 0);
+                const currentSlug = pathSegments.length > 0 && VALID_SLUGS.includes(pathSegments[0]) 
+                                    ? pathSegments[0] 
+                                    : null;
+                                    
+                if (currentSlug) {
+                    const country = countries.find(c => c.slug === currentSlug);
+                    if (country && country.langCode !== 'en') {
+                        translatePage(country.langCode);
+                    }
+                }
+            }
+
+
+            // --- Mobile Accordion Logic (FIXED) ---
+
+            function closeAccordion(button, content, icon) { // Added button argument
+                // Remove the 'open' class immediately to start the opacity transition to 0
+                content.classList.remove('open');
+                icon.classList.remove('rotate-180');
+                button.setAttribute('aria-expanded', 'false'); // Set ARIA on button
+
+                // Set the max-height explicitly to its current height before starting the transition to 0.
+                content.style.maxHeight = content.scrollHeight + 'px'; 
+                
+                // Use requestAnimationFrame to ensure the browser has time to register the scrollHeight 
+                // before setting max-height to 0px on the next frame.
+                requestAnimationFrame(() => {
+                    content.style.maxHeight = '0px';
+                });
+            }
+
+            function openAccordion(button, content, icon) { // Added button argument
+                // Add 'open' class immediately to trigger opacity: 1 and pointer-events: auto
+                content.classList.add('open');
+                
+                // Set max-height to scrollHeight for opening transition
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.classList.add('rotate-180');
+                button.setAttribute('aria-expanded', 'true'); // Set ARIA on button
+            }
+
+            function toggleAccordion(button) {
+                const targetId = button.getAttribute('data-dropdown-id');
+                const content = document.getElementById(targetId);
+                const icon = button.querySelector('.dropdown-icon');
+                
+                // FIX: Rely on the 'aria-expanded' attribute on the button for state
+                const isContentOpen = button.getAttribute('aria-expanded') === 'true';
+
+                // 1. Close all other open accordions
+                mobileDropdownTriggers.forEach(otherButton => {
+                    const otherContentId = otherButton.getAttribute('data-dropdown-id');
+                    const otherContent = document.getElementById(otherContentId);
+                    const otherIcon = otherButton.querySelector('.dropdown-icon');
+                    
+                    // Check if other accordion is open
+                    if (otherButton !== button && otherButton.getAttribute('aria-expanded') === 'true') {
+                        // Pass the button to closeAccordion
+                        closeAccordion(otherButton, otherContent, otherIcon); 
+                    }
+                });
+                
+                // 2. Toggle the current accordion
+                if (isContentOpen) {
+                    closeAccordion(button, content, icon); // Pass button
+                } else {
+                    openAccordion(button, content, icon); // Pass button
+                }
+            }
+
+            // Initialize: Ensure all dropdowns start visually closed immediately
+            mobileDropdownTriggers.forEach(button => {
+                const contentId = button.getAttribute('data-dropdown-id');
+                const content = document.getElementById(contentId);
+                content.style.maxHeight = '0px'; // Set explicitly in JS as fallback
+                button.setAttribute('aria-expanded', 'false'); // Ensure ARIA is set correctly on init
+                button.addEventListener('click', () => toggleAccordion(button));
+            });
+            // --- End Mobile Accordion Logic ---
+
+
+            // --- Initialization Functions ---
+
+            // Populate the Logo in two locations
+            if (navLogoImg) {
+                navLogoImg.src = NAV_LOGO_URL; 
+                navLogoImg.alt = LOGO_TEXT + ' Logo (Navigation)';
+            }
+            
+            // Populate Country Select Dropdown for the Beta Form
+            function populateCountryDropdown() {
+                // Skipping form-related function as countrySelect element is missing
+                /*
+                countries.filter(c => !c.isGlobal).forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.slug; 
+                    option.textContent = country.name + (country.sub ? ` (${country.sub})` : '');
+                    countrySelect.appendChild(option);
+                });
+                */
+            }
+            populateCountryDropdown();
+            
+            // Apply sticky translation immediately on load
+            checkAndApplyTranslationOnLoad();
+
+            
+            // --- Page Routing Logic (Simplified for Privacy Policy page) ---
+
+            function goToBetaPage() {
+                // If this element exists, we proceed with the routing
+                if (homepageContent && betaSignupPage) {
+                    homepageContent.classList.add('hidden');
+                    betaSignupPage.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                    if (!mobileMenu.classList.contains('translate-x-full')) {
+                        toggleMobileMenu(); 
+                    }
+                } else {
+                    alertMessage('Navigation to Beta page is not possible as the target element is missing.', true);
+                }
+            }
+
+            function goToHomePage() {
+                // If this element exists, we proceed with the routing
+                if (homepageContent && betaSignupPage) {
+                    if (!betaSignupPage.classList.contains('hidden')) {
+                        betaSignupPage.classList.add('hidden');
+                        homepageContent.classList.remove('hidden');
+                        // confirmationMessage.classList.add('hidden'); // Missing element
+                        // formContainer.classList.remove('hidden');    // Missing element
+                        // registrationForm.reset();                   // Missing element
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }
+            }
+            
+            // joinBetaBtn.addEventListener('click', goToBetaPage); // Missing element
+            
+            // UPDATED: Added joinMyAlethraBeta to the list of elements that trigger the Beta page
+            [navJoinMovement, mobileJoinMovement, joinMyAlethraBeta].forEach(el => {
+                if (el) {
+                    el.addEventListener('click', (e) => {
+                        e.preventDefault(); 
+                        goToBetaPage();
+                    });
+                }
+            });
+
+            // backToHomeBtn.addEventListener('click', goToHomePage); // Missing element
+            if (navLogoLink) {
+                navLogoLink.addEventListener('click', goToHomePage);
+            }
+
+
+            // --- Form Submission Logic (Skipped - elements missing) ---
+            /*
+            registrationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(registrationForm);
+                const data = Object.fromEntries(formData.entries());
+                console.log('Beta Registration Submitted:', data);
+
+                formContainer.classList.add('hidden');
+                confirmationMessage.classList.remove('hidden');
+                registrationForm.reset();
+            });
+
+            // Share Movement Button
+            shareMovementBtn.addEventListener('click', () => {
+                alertMessage('Sharing is caring! Copy the current URL to share the movement.', false);
+            });
+            */
+
+
+            // --- Mobile Menu Toggle Logic (Sidebar) ---
+            function toggleMobileMenu() {
+                const isMenuHidden = mobileMenu.classList.contains('translate-x-full');
+                
+                if (isMenuHidden) {
+                    // --- OPENING THE MENU ---
+                    mobileMenu.classList.remove('translate-x-full');
+                    document.body.classList.add('overflow-hidden');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-times text-xl"></i>'; // Change to X icon
+                } else {
+                    // --- CLOSING THE MENU (FIX APPLIED HERE) ---
+                    
+                    // 1. Check for and close all open mobile dropdowns immediately
+                    let wasAnyDropdownOpen = false;
+                    mobileDropdownTriggers.forEach(button => {
+                        const contentId = button.getAttribute('data-dropdown-id');
+                        const content = document.getElementById(contentId);
+                        
+                        // Check if content is currently open based on ARIA state
+                        if (button.getAttribute('aria-expanded') === 'true') {
+                            closeAccordion(button, content, button.querySelector('.dropdown-icon'));
+                            wasAnyDropdownOpen = true;
+                        }
+                    });
+
+                    // 2. Determine the necessary delay before sliding out the sidebar
+                    // Delay by 310ms if any accordion was closing (accordion transition is 300ms)
+                    const delay = wasAnyDropdownOpen ? 310 : 0; 
+
+                    // 3. Slide the sidebar out AFTER the content has collapsed
+                    setTimeout(() => {
+                        mobileMenu.classList.add('translate-x-full');
+                        document.body.classList.remove('overflow-hidden');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>'; // Change back to hamburger icon
+                    }, delay);
+                }
+            }
+
+            if (mobileMenuBtn) { mobileMenuBtn.addEventListener('click', toggleMobileMenu); }
+            if (mobileCloseBtn) { mobileCloseBtn.addEventListener('click', toggleMobileMenu); }
+
+            // Consolidated link click listener: Close mobile menu when navigating (clicking an <a> tag)
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', (e) => {
+                    // Use closest('a') to ensure we get the anchor tag even if a child element is clicked
+                    const target = e.target.closest('a'); 
+                    
+                    // Check if the clicked element is a link and not the globe link (which opens a modal)
+                    if (target && target.id !== 'global-link-mobile') {
+                        
+                        // If it's a link that triggers goToBetaPage(), the navigation function already 
+                        // calls toggleMobileMenu(), so we prevent double-handling.
+                        if (['mobile-join-movement', 'join-myalethra-beta'].includes(target.id)) { 
+                            return;
+                        }
+                        
+                        // For all other links (static links, sub-links), close the menu gracefully.
+                        // Use a short delay before closing the menu to ensure the link's href is processed (if applicable).
+                        setTimeout(toggleMobileMenu, 100);
+                    }
+                });
+            }
+
+
+            // --- Country Modal Logic (IMPROVED) ---
+
+            function openModal() {
+                console.log("Attempting to open country modal.");
+
+                if (!mobileMenu.classList.contains('translate-x-full')) {
+                    toggleMobileMenu(); // Close mobile menu if open
+                }
+
+                // 1. Ensure modal is visible and body is locked
+                countryModal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden'); 
+                
+                // 2. Force reflow/repaint to ensure CSS knows the 'hidden' class is gone 
+                //    before starting the opacity transition
+                void countryModal.offsetWidth; 
+
+                // 3. Start transition
+                countryModal.classList.add('opacity-100');
+                countryModal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }
+
+            function closeOutModal() {
+                countryModal.classList.remove('opacity-100');
+                countryModal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+
+                setTimeout(() => {
+                    countryModal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden'); 
+                }, 300);
+            }
+
+            // Render country links for the Modal
+            countries.forEach(country => {
+                const link = document.createElement('a');
+                link.href = "#"; 
+                
+                let content = country.name;
+                let className = 'text-klyr-dark text-sm hover:text-klyr-red transition duration-150';
+                
+                if (country.isGlobal) {
+                    content = `<span class="font-bold">${country.name}</span> <span class="text-sm text-gray-500">${country.sub}</span>`;
+                    className = 'font-bold block text-klyr-dark hover:text-klyr-red transition duration-150';
+                } else if (country.sub) {
+                    content = `${country.name} <span class="text-xs text-gray-500">| ${country.sub}</span>`;
+                }
+                
+                link.innerHTML = content;
+                link.className = className;
+                
+                link.onclick = (e) => {
+                    e.preventDefault();
+                    setCountryPath(country.slug, country.langCode); 
+                };
+
+                countryListContainer.appendChild(link);
+            });
+
+            // Attach listener to Desktop Icon and Mobile Link
+            if (globalIconDesktop) { 
+                globalIconDesktop.addEventListener('click', openModal); 
+            }
+            if (globalLinkMobile) { 
+                // FIX: Explicitly prevent default action on the mobile link
+                globalLinkMobile.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    openModal();
+                });
+            }
+            if (closeModalBtn) { closeModalBtn.addEventListener('click', closeOutModal); }
+            
+            // Close modal if user clicks on the backdrop
+            if (countryModal) {
+                countryModal.addEventListener('click', (e) => {
+                    if (e.target === countryModal) {
+                        closeOutModal();
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
