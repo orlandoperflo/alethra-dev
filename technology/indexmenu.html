@@ -427,8 +427,9 @@
     </div>
     
     
-<div id="footer-placeholder"></div>
-    <script src="/inject.js"></script>
+<script>
+document.write(fetch('/footer.html').then(r => r.text()));
+</script>
 <script>
         
         document.addEventListener('DOMContentLoaded', () => {
