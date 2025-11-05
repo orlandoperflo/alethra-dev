@@ -1,7 +1,7 @@
 function initNavLogic() {
 
         
-        document.addEventListener('DOMContentLoaded', () => {
+  
             
             // --- Global Data (Countries & Languages) ---
             const countries = [
@@ -375,10 +375,9 @@ function initNavLogic() {
                     }
                 });
             }
-        });
+       
 
    
 } // ← this closes the function properly
 
-// ✅ Now call it (only once)
-initNavLogic();
+
