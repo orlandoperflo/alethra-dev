@@ -67,7 +67,7 @@ function initNavLogic() {
             // --- Global Constants and Selectors ---
             const LOGO_TEXT = 'ALETHRA™';
             const NAV_LOGO_URL = 'https://plusbrand.com/wp-content/uploads/2025/10/Copia-de-ALETHRA_Logo-scaled.png'; 
-            const CONTENT_IMG_URL = 'https://plusbrand.com/wp-content/uploads/2025/10/Aletha-1.png'; 
+            const CONTENT_IMG_URL = 'https://plusbrand.com/wp-content/uploads/2025/11/Aletha-1.webp'; 
             const CONTENT_BOX_CLASSES = 'content-box-border-style rounded-lg flex h-full overflow-hidden'; 
 
             const navLogoImg = document.getElementById('nav-logo-img');
