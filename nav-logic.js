@@ -378,4 +378,7 @@ function initNavLogic() {
         });
 
    
+} // ← this closes the function properly
+
+// ✅ Now call it (only once)
 initNavLogic();
