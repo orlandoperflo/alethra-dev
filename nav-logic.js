@@ -1,6 +1,5 @@
 function initNavLogic() {
-document.addEventListener('DOMContentLoaded', () => {
-<script>
+
         
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -377,6 +376,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
-    </script>
-                          });
-}
+
+   
